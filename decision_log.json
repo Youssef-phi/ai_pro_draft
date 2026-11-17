@@ -1,0 +1,44 @@
+[
+ {
+  "timestamp": "2026-11-17T09:51:35Z",
+  "agent": "gate",
+  "action": "rule_prefilter",
+  "sources": [],
+  "model": null,
+  "cost": 0,
+  "approved_by": null,
+  "outcome": "stop",
+  "rules": [
+   "health_or_legal_advice"
+  ],
+  "kind": "excluded_product",
+  "run_id": "1a94fcdb"
+ },
+ {
+  "timestamp": "2026-11-17T09:51:35Z",
+  "agent": "orchestrator",
+  "action": "run_finished",
+  "sources": [],
+  "model": null,
+  "cost": 0,
+  "approved_by": null,
+  "outcome": "stop",
+  "run_total_cost_usd": 0.0,
+  "run_tokens": 0,
+  "run_llm_calls": 0,
+  "run_id": "1a94fcdb"
+ },
+ {
+  "timestamp": "2026-11-17T09:51:35Z",
+  "agent": "sales_ops",
+  "action": "sale_to_cash_checks",
+  "sources": [],
+  "model": null,
+  "cost": 0,
+  "approved_by": null,
+  "mocked": true,
+  "tests_passed": 9,
+  "tests_total": 9,
+  "approver": "test-harness"
+ }
+]

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VentureBoard: AI co-founder boardroom</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>VentureBoard</h1>
+    <p class="tag">An open-source AI board that co-founds with you, and tells you when not to launch.</p>
+  </div>
+  <div class="chips">
+    <span class="chip" id="chip-model">model: checking…</span>
+    <span class="chip" id="chip-panel"></span>
+    <span class="chip ai">AI voices (synthetic)</span>
+    <button id="mute" class="chip btn-chip" aria-pressed="false">Sound on</button>
+  </div>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<main>
+  <section id="brief-section" class="panel">
+    <h2>1. Founder brief</h2>
+    <p class="hint">A brief, not a one-line idea. The board reads everything against it.</p>
+    <form id="brief-form">
+      <label>Starting idea<textarea name="idea" rows="2" required placeholder="What you want to build, and for whom"></textarea></label>
+      <div class="two">
+        <label>Your skills<input name="skills" placeholder="e.g. Python, teaching, design"></label>
+        <label>Budget<input name="budget" placeholder="e.g. $200"></label>
+        <label>Hours per week<input name="hours_per_week" placeholder="e.g. 10"></label>
+        <label>Target market<input name="target_market" placeholder="e.g. freelance designers in Egypt"></label>
+      </div>
+      <label>Values<input name="values" placeholder="e.g. honest marketing, privacy first, no dark patterns"></label>
+      <button class="primary" type="submit">Convene the board</button>
+    </form>
+    <div class="rules">
+      <p><strong>You stay in control.</strong> Nothing is published, sent, spent or signed without your click, and that is enforced in code.</p>
+      <p><strong>Everything outside this machine is <span class="mock">MOCKED</span>:</strong> <span id="mock-list"></span>.</p>
+      <p><strong>Not allowed:</strong> physical goods; financial, investment or crypto products; health or legal advice products. The board will recommend stopping or pivoting.</p>
+      <p><strong>Targets are set before the evidence:</strong> <span id="threshold-list"></span></p>
+    </div>
+  </section>
+
+  <section id="room-section" hidden>
+    <div class="room-grid">
+      <div class="left">
+        <div class="panel">
+          <div class="room-head">
+            <h2 id="phase-title">Boardroom</h2>
+            <ol id="phase-track"></ol>
+          </div>
+          <div id="faces" class="faces"></div>
+          <div id="caption" class="caption" aria-live="polite">
+            <div class="who" id="cap-who">Waiting for the first speaker…</div>
+            <div class="line" id="cap-line"></div>
+            <div class="claims" id="cap-claims"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Ask the board or add a note</h2>
+          <form id="note-form" class="note-form">
+            <input id="note-text" placeholder="e.g. focus on students first" autocomplete="off">
+            <button type="submit">Send</button>
+          </form>
+          <div id="note-result" class="hint"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Decision log <span class="hint">(live, one entry per agent action)</span></h2>
+          <div id="log" class="log"></div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="panel" id="gate-panel" hidden>
+          <h2>Gate</h2>
+          <div id="gate-body"></div>
+        </div>
+        <div class="panel">
+          <h2>Waiting for you</h2>
+          <div id="requests"><p class="hint">Nothing needs your decision right now.</p></div>
+        </div>
+        <div class="panel">
+          <h2>Files produced</h2>
+          <ul id="files" class="files"></ul>
+        </div>
+        <div class="panel">
+          <h2>Notices</h2>
+          <ul id="notices" class="notices"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

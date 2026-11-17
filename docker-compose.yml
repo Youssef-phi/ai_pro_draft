@@ -1,0 +1,43 @@
+# One command: docker compose up   ->   http://localhost:8000
+# Runs with no API key: the app talks to the local open-weight model served by Ollama.
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # One-shot job: downloads the local model (about 5 GB the first time), then exits.
+  model-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL:-qwen3:8b}"]
+    restart: "no"
+
+  app:
+    build: .
+    depends_on:
+      ollama:
+        condition: service_healthy
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+    ports:
+      # Bound to this machine only: the app (and any key in .env) is never offered to other people.
+      - "127.0.0.1:${PORT:-8000}:8000"
+    volumes:
+      - ./runs:/app/runs
+      - ./data:/app/data
+
+volumes:
+  ollama_data:

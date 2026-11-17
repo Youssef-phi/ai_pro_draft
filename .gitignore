@@ -1,0 +1,28 @@
+# Secrets: real keys live only in the untracked .env
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Runtime data (web runs, budget counter). Demo runs are exported to outputs/ on purpose.
+runs/
+data/
+
+# Dependencies, build output, model files
+node_modules/
+dist/
+build/
+*.gguf
+*.safetensors
+ollama_data/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
